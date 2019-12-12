@@ -1,5 +1,5 @@
 /* potluck.h -- Potluck C++ utility library.
-   RELEASE VERSION 1.0 -- 12th December 2019
+   RELEASE VERSION 1.1 -- 12th December 2019
 
 MIT License
 
@@ -59,6 +59,7 @@ namespace potluck
 
 extern unsigned int	prand_seed;		// Pseudorandom number seed.
 
+unsigned int	build_version();	// Returns a build version integer.
 std::tuple<double, double, double>	calc_beam(int start_x, int start_y, int end_x, int end_y);	// Calculates a beam between two points.
 std::string		capitalize_first(std::string str);	// Capitalizes the first letter of a string, if needed.
 bool			check_flag(unsigned int flags, unsigned int flag_to_check);	// Checks to see if a flag is set.
