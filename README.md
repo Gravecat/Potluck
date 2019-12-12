@@ -2,7 +2,7 @@
 
 The Potluck library is a collection of mismatched, odd bits and pieces of utility code that I've used a lot in my last few projects. It primarily consists of string manipulation, math-related functions, some file-handling utility, and a simple random name generation system.
 
-[PCG](http://www.pcg-random.org/) (c) 2014 Melissa O'Neill.
+[PCG](http://www.pcg-random.org/) Copyright 2014 Melissa O'Neill <oneill@pcg-random.org>
 
 
 ## MIT License
