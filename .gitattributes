@@ -1,4 +1,5 @@
 .github/FUNDING.yml linguist-documentation
+pcg_*.hpp linguist-vendored
 potluck*.h linguist-language=C++
 LICENSE linguist-documentation
 README linguist-documentation
