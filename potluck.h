@@ -1,5 +1,5 @@
 /* potluck.h -- Potluck C++ utility library.
-   RELEASE VERSION 1.1 -- 12th December 2019
+   RELEASE VERSION 1.11 -- 12th December 2019
 
 MIT License
 
@@ -92,7 +92,7 @@ void			gz_write_string_clear(const gzFile &file_save, std::string data);	// Writ
 #endif
 unsigned int	hash(std::string s);	// FNV string hash.
 unsigned int	htoi(std::string hex_str);	// Converts a hex string back to an integer.
-bool			instr(std::string input, std::string check);	// Simple way to check if a string is in another string.
+bool			in_string(std::string input, std::string check);	// Simple way to check if a string is in another string.
 std::string		intoroman(unsigned short number);	// Converts a number into Roman numerals.
 std::string		intostr_k(unsigned long long num, unsigned int precision);	// Converts an int into a k-style string; for example 10000 becomes 10k.
 std::string		intostr_pretty(int num);	// Returns a 'pretty' version of a number in string format, such as "12,345".

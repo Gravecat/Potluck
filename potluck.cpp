@@ -1,5 +1,5 @@
 /* potluck.cpp -- Potluck C++ utility library.
-   RELEASE VERSION 1.1 -- 12th December 2019
+   RELEASE VERSION 1.11 -- 12th December 2019
 
 MIT License
 
@@ -29,6 +29,7 @@ SOFTWARE.
 #include <algorithm>
 #include <chrono>
 #include <cmath>
+#include <cstdlib>
 #include <ctime>
 #include <dirent.h>
 #if defined(_WIN32) || defined(_WIN64)
@@ -39,6 +40,7 @@ SOFTWARE.
 #include <regex>
 #include <sstream>
 #include <sys/stat.h>
+#include <unistd.h>
 
 #include "pcg_random.hpp"
 #include "potluck.h"
@@ -547,7 +549,7 @@ unsigned int htoi(std::string hex_str)
 }
 
 // Simple way to check if a string is in another string.
-bool instr(std::string input, std::string check)
+bool in_string(std::string input, std::string check)
 {
 	stack_trace();
 	return (input.find(check, 0) != std::string::npos);
