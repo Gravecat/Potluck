@@ -1,5 +1,5 @@
 /* potluck.h -- Potluck C++ utility library.
-   RELEASE VERSION 1.11 -- 12th December 2019
+   RELEASE VERSION 1.12 -- 15th December 2019
 
 MIT License
 
@@ -26,18 +26,27 @@ SOFTWARE.
 
 #pragma once
 
-//#define USING_GURU_MEDITATION	// Uncomment this line if you are using my Guru Meditation library and want to include the stack-trace code.
-//#define USING_JSONCPP			// Uncomment this line if you are using JsonCpp.
-//#define USING_ZLIB			// Uncomment this line if you're using zlib.
-
-#define USE_NAME_GENERATOR	// Disable this to NOT use the name-generator system. This will save a fair amount of compilation time and binary size.
-
 #include <map>
 #include <set>
 #include <string>
 #include <tuple>
 #include <unordered_map>
 #include <vector>
+
+
+namespace potluck
+{
+
+#define USING_GURU_MEDITATION	// Uncomment this line if you are using my Guru Meditation library and want to include the stack-trace code.
+//#define USING_JSONCPP			// Uncomment this line if you are using JsonCpp.
+//#define USING_ZLIB			// Uncomment this line if you're using zlib.
+
+#define USE_NAME_GENERATOR	// Disable this to NOT use the name-generator system. This will save a fair amount of compilation time and binary size.
+
+// If we're NOT using the Guru Meditation system, this'll just make the stack_trace() call do nothing.
+#ifndef USING_GURU_MEDITATION
+#define stack_trace() (void)0
+#endif
 
 #ifdef USING_JSONCPP
 namespace Json { class Value; }
@@ -48,14 +57,6 @@ struct gzfile_s;
 typedef struct gzFile_s *gzFile;
 #endif
 
-
-namespace potluck
-{
-
-// If we're NOT using the Guru Meditation system, this'll just make the stack_trace() call do nothing.
-#ifndef USING_GURU_MEDITATION
-#define stack_trace() (void)0
-#endif
 
 extern unsigned int	prand_seed;		// Pseudorandom number seed.
 

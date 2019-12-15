@@ -1,5 +1,5 @@
 /* potluck.cpp -- Potluck C++ utility library.
-   RELEASE VERSION 1.11 -- 12th December 2019
+   RELEASE VERSION 1.12 -- 15th December 2019
 
 MIT License
 
