@@ -1,5 +1,5 @@
 /* potluck.cpp -- Potluck C++ utility library.
-   RELEASE VERSION 1.12 -- 15th December 2019
+   RELEASE VERSION 1.13 -- 16th December 2019
 
 MIT License
 
@@ -45,13 +45,13 @@ SOFTWARE.
 #include "pcg_random.hpp"
 #include "potluck.h"
 
-#ifdef USING_GURU_MEDITATION
+#ifdef POTLUCK_USING_GURU_MEDITATION
 #include "guru.h"
 #else
 #include <stdexcept>
 #endif
 
-#ifdef USING_JSONCPP
+#ifdef POTLUCK_USING_JSONCPP
 #include "jsoncpp/json/json.h"
 #endif
 
@@ -442,14 +442,14 @@ float grid_dist(long long x1, long long y1, long long z1, long long x2, long lon
 	return potluck::round_to_two(dist);
 }
 
-#ifdef USING_ZLIB
+#ifdef POTLUCK_USING_ZLIB
 // Reads an unencrypted string from a zlib binary file, with size markers. Harder than it sounds.
 std::string gz_read_string(const gzFile &file_load)
 {
 	STACK_TRACE();
 	if (!file_load)
 	{
-#ifdef USING_GURU_MEDITATION
+#ifdef POTLUCK_USING_GURU_MEDITATION
 		guru::halt("Invalid file handle!");
 #else
 		abort();
@@ -464,7 +464,7 @@ std::string gz_read_string(const gzFile &file_load)
 	char *buffer = new char[datalen + 1];
 	if (!buffer)
 	{
-#ifdef USING_GURU_MEDITATION
+#ifdef POTLUCK_USING_GURU_MEDITATION
 		guru::halt("Could not allocate memory!");
 #else
 		abort();
@@ -485,7 +485,7 @@ void gz_write_string(const gzFile &file_save, std::string data)
 	stack_trace();
 	if (!file_save)
 	{
-#ifdef USING_GURU_MEDITATION
+#ifdef POTLUCK_USING_GURU_MEDITATION
 		guru::halt("Invalid file handle!");
 #else
 		abort();
@@ -509,7 +509,7 @@ void gz_write_string_clear(const gzFile &file_save, std::string data)
 	stack_trace();
 	if (!file_save)
 	{
-#ifdef USING_GURU_MEDITATION
+#ifdef POTLUCK_USING_GURU_MEDITATION
 		guru::halt("Invalid file handle!");
 #else
 		abort();
@@ -734,12 +734,12 @@ std::string itos(long long num)
 	return ss.str();
 }
 
-#ifdef USING_JSONCPP
+#ifdef POTLUCK_USING_JSONCPP
 // Loads an individual JSON file, with error-checking.
-Json::Value	load_json(std::string filename)
+::Json::Value	load_json(std::string filename)
 {
 	stack_trace();
-	Json::Value json;
+	::Json::Value json;
 	std::ifstream file_load(filename, std::ios::in);
 	try
 	{
@@ -750,7 +750,7 @@ Json::Value	load_json(std::string filename)
 		if (!ok)
 		{
 			file_load.close();
-#ifdef USING_GURU_MEDITATION
+#ifdef POTLUCK_USING_GURU_MEDITATION
 			guru::halt(errs);
 #else
 			abort();
@@ -760,7 +760,7 @@ Json::Value	load_json(std::string filename)
 	catch (std::exception &e)
 	{
 		file_load.close();
-#ifdef USING_GURU_MEDITATION
+#ifdef POTLUCK_USING_GURU_MEDITATION
 		guru::halt(e.what());
 #else
 		abort();
@@ -779,7 +779,7 @@ std::vector<std::string> load_text(std::string filename)
 	std::ifstream file_load(filename);
 	if (!file_load.good())
 	{
-#ifdef USING_GURU_MEDITATION
+#ifdef POTLUCK_USING_GURU_MEDITATION
 		guru::nonfatal("Could not open file: " + filename, GURU_CRITICAL);
 #endif
 		return result;
@@ -866,7 +866,7 @@ std::string parse_meta(std::string metadata, std::string key)
 		std::vector<std::string> split = potluck::string_explode(pairs.at(p), ":");
 		if (split.size() != 2)
 		{
-#ifdef USING_GURU_MEDITATION
+#ifdef POTLUCK_USING_GURU_MEDITATION
 			guru::halt("Invalid metadata string [" + metadata + "], [" + pairs.at(p) + "]");
 #else
 			throw std::invalid_argument("invalid metadata string");
@@ -1103,7 +1103,7 @@ unsigned int roll(std::string dice)
 	std::vector<std::string> dice_vec = potluck::string_explode(dice, "d");
 	if (dice_vec.size() != 2)
 	{
-#ifdef USING_GURU_MEDITATION
+#ifdef POTLUCK_USING_GURU_MEDITATION
 		guru::halt("Invalid dice string: " + dice);
 #else
 		throw std::invalid_argument("invalid dice string: " + dice);
@@ -1117,7 +1117,7 @@ unsigned int roll(std::string dice)
 	const int plus = atoi(dice_vec.at(2).c_str());
 	if (num < 1 || sides < 2)
 	{
-#ifdef USING_GURU_MEDITATION
+#ifdef POTLUCK_USING_GURU_MEDITATION
 		guru::halt("Invalid dice string: " + dice);
 #else
 		throw std::invalid_argument("invalid dice string: " + dice);
@@ -1242,7 +1242,7 @@ std::unordered_map<std::string, std::string> string_to_metadata(std::string meta
 		std::vector<std::string> md_pair = potluck::string_explode(md_exp.at(i), ":");
 		if (md_pair.size() != 2)
 		{
-#ifdef USING_GURU_MEDITATION
+#ifdef POTLUCK_USING_GURU_MEDITATION
 			guru::nonfatal("Invalid metadata string: " + metadata, GURU_ERROR);
 #endif
 		}

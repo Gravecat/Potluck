@@ -1,5 +1,5 @@
 /* potluck.h -- Potluck C++ utility library.
-   RELEASE VERSION 1.12 -- 15th December 2019
+   RELEASE VERSION 1.13 -- 16th December 2019
 
 MIT License
 
@@ -26,6 +26,10 @@ SOFTWARE.
 
 #pragma once
 
+#define POTLUCK_USING_GURU_MEDITATION	// Comment out this line if you are NOT using my Guru Meditation library and/or do not want to include the stack-trace code.
+#define POTLUCK_USING_JSONCPP			// Comment out this line if you are NOT using JsonCpp.
+//#define POTLUCK_USING_ZLIB			// Uncomment this line if you're using zlib.
+
 #include <map>
 #include <set>
 #include <string>
@@ -34,28 +38,25 @@ SOFTWARE.
 #include <vector>
 
 
-namespace potluck
-{
-
-#define USING_GURU_MEDITATION	// Uncomment this line if you are using my Guru Meditation library and want to include the stack-trace code.
-//#define USING_JSONCPP			// Uncomment this line if you are using JsonCpp.
-//#define USING_ZLIB			// Uncomment this line if you're using zlib.
-
-#define USE_NAME_GENERATOR	// Disable this to NOT use the name-generator system. This will save a fair amount of compilation time and binary size.
-
-// If we're NOT using the Guru Meditation system, this'll just make the stack_trace() call do nothing.
-#ifndef USING_GURU_MEDITATION
-#define stack_trace() (void)0
-#endif
-
-#ifdef USING_JSONCPP
+#ifdef POTLUCK_USING_JSONCPP
 namespace Json { class Value; }
 #endif
 
-#ifdef USING_ZLIB
+#ifdef POTLUCK_USING_ZLIB
 struct gzfile_s;
 typedef struct gzFile_s *gzFile;
 #endif
+
+// If we're NOT using the Guru Meditation system, this'll just make the stack_trace() call do nothing.
+#ifndef POTLUCK_USING_GURU_MEDITATION
+#define stack_trace() (void)0
+#endif
+
+
+namespace potluck
+{
+
+#define USE_NAME_GENERATOR	// Disable this to NOT use the name-generator system. This will save a fair amount of compilation time and binary size.
 
 
 extern unsigned int	prand_seed;		// Pseudorandom number seed.
@@ -86,7 +87,7 @@ std::string		ftos(double num);	// Converts a float or double to a string.
 unsigned int	fuzz(unsigned int num);	// Fuzzes a number, giving an estimate (e.g. 123456 becoomes 100000).
 float			grid_dist(long long x1, long long y1, long long x2, long long y2);	// Determines the difference between two points on a grid.
 float			grid_dist(long long x1, long long y1, long long z1, long long x2, long long y2, long long z2);	// As above, but for a three-dimensional grid.
-#ifdef USING_ZLIB
+#ifdef POTLUCK_USING_ZLIB
 std::string		gz_read_string(const gzFile &file_load);	// Reads an unencrypted string from a zlib binary file, with size markers. Harder than it sounds.
 void			gz_write_string(const gzFile &file_save, std::string data);	// Writes a string to a zlib binary save file, with length markers.
 void			gz_write_string_clear(const gzFile &file_save, std::string data);	// Writes a clear-text string to a zlib binary file.
@@ -102,7 +103,7 @@ bool			is_file(std::string filename);	// Checks if a filename is a file or direc
 bool			is_odd(unsigned int num);	// Checks if a number is odd.
 std::string		itoh(unsigned int num, unsigned char min_len);	// Converts an integer into a hex string.
 std::string		itos(long long num);	// Converts an integer to a string.
-#ifdef USING_JSONCPP
+#ifdef POTLUCK_USING_JSONCPP
 Json::Value		load_json(std::string filename);	// Loads an individual JSON file, with error-checking.
 #endif
 std::vector<std::string>	load_text(std::string filename);	// Loads a text file into a string vector.
