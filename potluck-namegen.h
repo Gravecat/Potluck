@@ -1,5 +1,5 @@
 /* potluck-namegen.h -- Potluck C++ utility library. This optional file contains static strings used by the random name generator.
-   RELEASE VERSION 1.13 -- 16th December 2019
+   RELEASE VERSION 1.2 -- 16th December 2019
 
 MIT License
 

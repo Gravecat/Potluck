@@ -1,5 +1,5 @@
 /* potluck.h -- Potluck C++ utility library.
-   RELEASE VERSION 1.13 -- 16th December 2019
+   RELEASE VERSION 1.2 -- 16th December 2019
 
 MIT License
 
@@ -137,6 +137,7 @@ unsigned int	rnd(unsigned int max);	// Returns a random number between 1 and max
 unsigned int	roll(std::string dice);	// 'Rolls' a specified amount of dice.
 double			round_to(double num, unsigned int digits);	// Rounds a float to a specified number of digits.
 float			round_to_two(float num);	// Rounds a float to two decimal places.
+unsigned int	round_to_uchar(int num);	// Ensures a number fits into an unsigned char (0-255), discarding any values below 0 or above 255.
 std::string		set_to_string(std::set<unsigned int> the_set);	// Converts a set of integers into a string.
 unsigned char	sneaky_xor(unsigned char src, unsigned char mask);	// It's like XOR, but sneakier.
 std::string		str_repeat(std::string source, int repeats);	// Repeats a string a number of times.

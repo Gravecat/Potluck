@@ -1,5 +1,5 @@
 /* potluck.cpp -- Potluck C++ utility library.
-   RELEASE VERSION 1.13 -- 16th December 2019
+   RELEASE VERSION 1.2 -- 16th December 2019
 
 MIT License
 
@@ -1148,6 +1148,14 @@ float round_to_two(float num)
 {
 	stack_trace();
 	return floorf(num * 100 + 0.5) / 100;
+}
+
+// Ensures a number fits into an unsigned char (0-255), discarding any values below 0 or above 255.
+unsigned int round_to_uchar(int num)
+{
+	if (num < 0) return 0;
+	else if (num > 255) return 255;
+	else return num;
 }
 
 // Converts a set of integers into a string.
